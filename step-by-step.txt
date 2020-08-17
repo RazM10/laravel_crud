@@ -1,0 +1,10 @@
+-edit db name after creating db in myadmin
+
+-to generate migration file
+    php artisan make:migration create_users_table
+
+-create table and column following structure in migratin file
+    id, name, age, address
+
+-to execute migration i.e. create tables in phpmyadmin
+    php artisan migrate

@@ -24,7 +24,8 @@
     <div class="container">
         <div class="row pb-2">
             <div class="col-md-12 text-right">
-                <a class="btn btn-primary" href="http://">Add New</a>
+                <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
+                <a class="btn btn-primary" href="{{route('crud.add')}}">Add New</a>
             </div>
         </div>
         <div class="row">

@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::get('/test', 'CrudController@test');
 
-Route::get('/crud', function(){
-    return view('list');
-});
+Route::get('/crud', 'CrudController@show');
+
+Route::get('/crud/add', 'CrudController@addUser')->name('crud.add'); //name is optional. used for link
+
+Route::post('/crud/add', 'CrudController@saveUser')->name('crud.save');

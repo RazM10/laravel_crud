@@ -23,8 +23,34 @@
 -create view in resources/views/list.blade.php to write bs+css code(it cann't create with artisan command)
     -add bootstrap css+js files in public/assets/cssORjs
         -<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        -<a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a>
+        -<a class="btn btn-primary" href="{{route('crud.add')}}">Add New</a>
+        -<form action="" method="post" name="addUser" id="addUser">
+
+-then, write show function in CrudController for returning view
+    function show(){
+        return view('list');
+    }
 
 -then create router for view list in routes/web.php
-    Route::get('/crud', function(){
-        return view('list');
-    });
+    Route::get('/crud', 'CrudController@show');
+
+-cross-site request forgery (CSRF). Laravel automatically generates a CSRF "token" for each active user session
+ managed by the application. if we miss it to write then show error 'page expired'
+    -<form action="" method="post" name="addUser" id="addUser">
+                            @csrf
+    -otherwise you can write a code in 'Http/Middleware/VerifyCsrfToken.php' for remove error 'page expired'
+        protected $except = [
+            '/crud/add'
+        ];
+    
+-For add user
+    -in view (Data enter page rout is: Route::get('/crud/add', 'CrudController@addUser')->name('crud.add');)
+        <form action="{{url('/crud/add')}}" method="post" name="addUser" id="addUser">
+                            @csrf
+    -in controller
+        function saveUser(Request $request){
+            dd($request->all()); //dump and die(dd)- It is a helper function which is used to dump a variable's contents to the browser and stop the further script execution
+        }
+    -in route
+        Route::post('/crud/add', 'CrudController@saveUser')->name('crud.save');

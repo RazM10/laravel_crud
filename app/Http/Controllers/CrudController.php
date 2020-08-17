@@ -10,7 +10,15 @@ class CrudController extends Controller
         echo "Hello there";
     }
 
-    // function show(){
-    //     return view('list');
-    // }
+    function show(){
+        return view('list');
+    }
+
+    function addUser(){
+        return view('add');
+    }
+
+    function saveUser(Request $request){
+        dd($request->all());
+    }
 }

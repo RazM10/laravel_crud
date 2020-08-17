@@ -22,6 +22,7 @@
 
 -create view in resources/views/list.blade.php to write bs+css code(it cann't create with artisan command)
     -add bootstrap css+js files in public/assets/cssORjs
+        -<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
 -then create router for view list in routes/web.php
     Route::get('/crud', function(){

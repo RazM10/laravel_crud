@@ -12,4 +12,13 @@
 -create controller of crud with the help of 'artisan' command in app/Http/Contrillers/*
     php artisan make:controller CrudController
 
+-create method in CrudController and call it in router
+    function test(){
+        echo "Hello there";
+    }
+
 -create router in routes/web.php (get method). it will return info as requested by user in browser.
+    Route::get('/test', 'CrudController@test');
+
+-create view in resources/views/list.blade.php to write bs+css code(it cann't create with artisan command)
+    -add bootstrap css+js files in public/assets/cssORjs

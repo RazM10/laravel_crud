@@ -11,3 +11,5 @@
 
 -create controller of crud with the help of 'artisan' command in app/Http/Contrillers/*
     php artisan make:controller CrudController
+
+-create router in routes/web.php (get method). it will return info as requested by user in browser.

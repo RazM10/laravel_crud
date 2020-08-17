@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class CrudController extends Controller
 {
-    //
+    function test(){
+        echo "Hello there";
+    }
 }

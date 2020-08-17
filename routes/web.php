@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', 'CrudController@test');
+
+Route::get('/crud', function(){
+    return view('list');
+});

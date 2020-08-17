@@ -9,4 +9,8 @@ class CrudController extends Controller
     function test(){
         echo "Hello there";
     }
+
+    // function show(){
+    //     return view('list');
+    // }
 }

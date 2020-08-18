@@ -14,15 +14,15 @@
         </div>
     </nav>
 
-    <div class="jumbotron jumbotron-fluid">
+    <!-- <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Laravel Application</h1>
             <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
         </div>
-    </div>
+    </div> -->
 
     <div class="container">
-        <div class="row pb-2">
+        <div class="row pb-2 pt-2">
             <div class="col-md-12 text-right">
                 <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
                 <a class="btn btn-primary mb-1" href="{{route('crud.add')}}">{{$name}}</a>

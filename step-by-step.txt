@@ -196,7 +196,29 @@
 
 -For Delete Data
     -Create "deleteCrud()" method in "CrudController"
+        function deleteCrud($id, Request $request){
+            $crud = Crud::where('id', $id)->first();
+            
+            if(!$crud){
+                $request->session()->flash('errmsg','No Data Found');
+                return redirect('/crud');
+            }
+
+            Crud::where('id',$id)->delete();
+            $request->session()->flash('msg','Data Deleted Successfully');
+            return redirect('/crud');
+        }
 
     -connect this method with route
+        Route::get('/crud/delete/{id}', 'CrudController@deleteCrud')->name('crud.delete');
 
     -Add js code in 'list' view to delete data
+        -<a class="btn btn-danger" href="#" onclick="deleteCrud({{$crud->id}})">Delete</a>
+
+        -<script>
+            function deleteCrud(id){
+                if(confirm('Are you sure?')){
+                    window.location.href = "{{url('/crud/delete')}}/"+id;
+                }
+            }
+        </script>

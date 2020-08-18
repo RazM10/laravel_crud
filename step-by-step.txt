@@ -61,6 +61,47 @@
         protected $table = 'crud';
 
     -then edit 'saveUser()' method in 'CrudController' to insert data in db
+        -insert can do in two ways (1.Database/Query Bulder 2.Eloquent ORM[Better])
+        -   use Illuminate\Support\Facades\Validator;
+            use App\Crud;
+            
+            function saveUser(Request $request){
+            // dd($request->all());
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|max:20',
+                'age' => 'required',
+                'address' => 'required'
+            ]);
+
+            if($validator->passes()){
+                $crud = new Crud;
+                $crud->name = $request->name;
+                $crud->age = $request->age;
+                $crud->address = $request->address;
+                $crud->save();
+
+                $request->session()->flash('msg','Data Saved Successfully');
+                return redirect('/crud');
+            }
+            else{
+                return redirect('crud/add')->withErrors($validator)->withInput();
+            }
+        }
     
+    -then edit in 'add' view where data is inputed
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="{{old('name')}}" placeholder="Enter Name" class="form-control {{ ($errors->any() && $errors->first('name')) ? 'is-invalid' : '' }}">
+            @if($errors->any())
+                <small class="form-text invalid-feedback">{{$errors->first('name')}}</small>
+            @endif
+        </div>
+
+    -then edit in 'list' view to show 'session' msg returned from 'add' view
+        @if(Session::has('msg'))
+            <div class="col-md-12">
+                <div class="alert alert-success">{{Session::get('msg')}}</div>
+            </div>
+        @endif
 
     

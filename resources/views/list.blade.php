@@ -27,6 +27,12 @@
                 <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
                 <a class="btn btn-primary" href="{{route('crud.add')}}">Add New</a>
             </div>
+
+            @if(Session::has('msg'))
+                <div class="col-md-12">
+                    <div class="alert alert-success">{{Session::get('msg')}}</div>
+                </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-md-12">

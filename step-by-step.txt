@@ -44,7 +44,7 @@
             '/crud/add'
         ];
     
--For add user
+-For insert user
     -in view (Data enter page rout is: Route::get('/crud/add', 'CrudController@addUser')->name('crud.add');)
         <form action="{{url('/crud/add')}}" method="post" name="addUser" id="addUser">
                             @csrf
@@ -57,7 +57,10 @@
     -then, create model with artisan command (Eloquent ORM) in 'app/Crud.php'
         php artisan make:model Crud
 
-    -then add table in created model
+    -then add table in created model then close it
         protected $table = 'crud';
+
+    -then edit 'saveUser()' method in 'CrudController' to insert data in db
+    
 
     

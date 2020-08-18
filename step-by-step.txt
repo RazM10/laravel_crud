@@ -193,3 +193,10 @@
                 return redirect('crud/edit/'.$id)->withErrors($validator)->withInput();
             }
         }
+
+-For Delete Data
+    -Create "deleteCrud()" method in "CrudController"
+
+    -connect this method with route
+
+    -Add js code in 'list' view to delete data

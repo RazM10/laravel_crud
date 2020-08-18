@@ -85,4 +85,18 @@ class CrudController extends Controller
             return redirect('crud/edit/'.$id)->withErrors($validator)->withInput();
         }
     }
+
+    //Delete Crud
+    function deleteCrud($id, Request $request){
+        $crud = Crud::where('id', $id)->first();
+        
+        if(!$crud){
+            $request->session()->flash('errmsg','No Data Found');
+            return redirect('/crud');
+        }
+
+        Crud::where('id',$id)->delete();
+        $request->session()->flash('msg','Data Deleted Successfully');
+        return redirect('/crud');
+    }
 }

@@ -28,3 +28,6 @@ Route::post('/crud/add', 'CrudController@saveUser')->name('crud.save');
 //For update data
 Route::get('/crud/edit/{id}', 'CrudController@editCrud')->name('crud.edit');
 Route::post('/crud/edit/{id}', 'CrudController@updateCrud')->name('crud.update');
+
+//For Delete Data
+Route::get('/crud/delete/{id}', 'CrudController@deleteCrud')->name('crud.delete');

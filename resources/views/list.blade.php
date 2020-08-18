@@ -68,7 +68,7 @@
                                             <td>{{$crud->created_at}}</td>
                                             <td>
                                                 <a class="btn btn-primary" href="{{'crud/edit/'.$crud->id}}">Edit</a>
-                                                <a class="btn btn-danger" href="http://">Delete</a>
+                                                <a class="btn btn-danger" href="#" onclick="deleteCrud({{$crud->id}})">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -85,5 +85,13 @@
         </div>
     </div>
     
+    <script>
+        function deleteCrud(id){
+            if(confirm('Are you sure?')){
+                window.location.href = "{{url('/crud/delete')}}/"+id;
+            }
+        }
+    </script>
+
 </body>
 </html>

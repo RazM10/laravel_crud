@@ -21,6 +21,10 @@ Route::get('/test', 'CrudController@test');
 
 Route::get('/crud', 'CrudController@show');
 
+// For add data
 Route::get('/crud/add', 'CrudController@addUser')->name('crud.add'); //name is optional. used for link
-
 Route::post('/crud/add', 'CrudController@saveUser')->name('crud.save');
+
+//For update data
+Route::get('/crud/edit/{id}', 'CrudController@editCrud')->name('crud.edit');
+Route::post('/crud/edit/{id}', 'CrudController@updateCrud')->name('crud.update');

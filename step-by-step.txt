@@ -139,3 +139,12 @@
                 </tr>
             @endif
         </tbody>
+
+-For Update Data
+    -crate view 'resourse/views/edit.blade.php'
+
+    -connect this view with a route in 'routes/web.php'
+
+    -create a 'editCrud()' method in 'CrudController'
+
+    -now, create a 'updateCrud()' method in 'CrudController' to update data in db

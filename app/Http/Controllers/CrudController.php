@@ -22,6 +22,7 @@ class CrudController extends Controller
         // return view('list', ['cruds' => $cruds],['name' => $name]);
     }
 
+    //Insert User
     function addUser(){
         return view('add');
     }
@@ -48,6 +49,40 @@ class CrudController extends Controller
         }
         else{
             return redirect('crud/add')->withErrors($validator)->withInput();
+        }
+    }
+
+    //Edit Crud
+    function editCrud($id, Request $request){
+        $crud = Crud::where('id', $id)->first();
+        
+        if(!$crud){
+            $request->session()->flash('errmsg','No Data Found');
+            return redirect('/crud');
+        }
+
+        return view('edit')->with(compact('crud'));
+    }
+
+    function updateCrud($id, Request $request){
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|max:20',
+            'age' => 'required',
+            'address' => 'required'
+        ]);
+
+        if($validator->passes()){
+            $crud = Crud::find($id);
+            $crud->name = $request->name;
+            $crud->age = $request->age;
+            $crud->address = $request->address;
+            $crud->save();
+
+            $request->session()->flash('msg','Data Updated Successfully');
+            return redirect('/crud');
+        }
+        else{
+            return redirect('crud/edit/'.$id)->withErrors($validator)->withInput();
         }
     }
 }

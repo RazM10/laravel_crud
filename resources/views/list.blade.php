@@ -25,12 +25,17 @@
         <div class="row pb-2">
             <div class="col-md-12 text-right">
                 <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
-                <a class="btn btn-primary" href="{{route('crud.add')}}">{{$name}}</a>
+                <a class="btn btn-primary mb-1" href="{{route('crud.add')}}">{{$name}}</a>
             </div>
 
             @if(Session::has('msg'))
                 <div class="col-md-12">
                     <div class="alert alert-success">{{Session::get('msg')}}</div>
+                </div>
+            @endif
+            @if(Session::has('errmsg'))
+                <div class="col-md-12">
+                    <div class="alert alert-danger">{{Session::get('errmsg')}}</div>
                 </div>
             @endif
         </div>
@@ -62,7 +67,7 @@
                                             <td>{{$crud->address}}</td>
                                             <td>{{$crud->created_at}}</td>
                                             <td>
-                                                <a class="btn btn-primary" href="http://">Edit</a>
+                                                <a class="btn btn-primary" href="{{'crud/edit/'.$crud->id}}">Edit</a>
                                                 <a class="btn btn-danger" href="http://">Delete</a>
                                             </td>
                                         </tr>

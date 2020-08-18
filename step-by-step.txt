@@ -142,9 +142,54 @@
 
 -For Update Data
     -crate view 'resourse/views/edit.blade.php'
+        <form action="{{url('/crud/edit/'.$crud->id)}}" method="post" name="addUser" id="addUser">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="{{old('name',$crud->name)}}" placeholder="Enter Name" class="form-control {{ ($errors->any() && $errors->first('name')) ? 'is-invalid' : '' }}">
+                @if($errors->any())
+                    <small class="form-text invalid-feedback">{{$errors->first('name')}}</small>
+                @endif
+            </div>
 
-    -connect this view with a route in 'routes/web.php'
+    -Pass data from 'list' view to 'edit' view
+        <a class="btn btn-primary" href="{{'crud/edit/'.$crud->id}}">Edit</a>
 
-    -create a 'editCrud()' method in 'CrudController'
+    -connect 'edit' view with route in 'routes/web.php'
+        Route::get('/crud/edit/{id}', 'CrudController@editCrud')->name('crud.edit');
+        Route::post('/crud/edit/{id}', 'CrudController@updateCrud')->name('crud.update');
+
+    -create a 'editCrud()' method in 'CrudController' to pass data to 'edit' view 
+        function editCrud($id, Request $request){
+            $crud = Crud::where('id', $id)->first();
+        
+            if(!$crud){
+                $request->session()->flash('errmsg','No Data Found');
+                return redirect('/crud');
+            }
+
+            return view('edit')->with(compact('crud'));
+        }
 
     -now, create a 'updateCrud()' method in 'CrudController' to update data in db
+        function updateCrud($id, Request $request){
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|max:20',
+                'age' => 'required',
+                'address' => 'required'
+            ]);
+
+            if($validator->passes()){
+                $crud = Crud::find($id);
+                $crud->name = $request->name;
+                $crud->age = $request->age;
+                $crud->address = $request->address;
+                $crud->save();
+
+                $request->session()->flash('msg','Data Updated Successfully');
+                return redirect('/crud');
+            }
+            else{
+                return redirect('crud/edit/'.$id)->withErrors($validator)->withInput();
+            }
+        }

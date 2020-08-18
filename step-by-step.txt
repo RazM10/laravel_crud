@@ -107,4 +107,35 @@
 -For Read All Data
     -retrive data can do in two ways (1.Database/Query Bulder 2.Eloquent ORM[Better])
     -edit show method in CrudController
-        
+        use Illuminate\Support\Facades\DB;  //used for 'Query Bulder'
+
+        function show(){
+            // $cruds = DB::table('crud')->orderBy('id')->get();
+            $cruds = Crud::all();  //Eloquent ORM
+
+            $name = "Add New";
+            return view('list')->with(compact('cruds'))->with(compact('name'));
+            // return view('list', ['cruds' => $cruds],['name' => $name]);
+        }
+    -then edit in 'list' view to show data by appling freach loop
+        <tbody>
+            @if($cruds)
+                @foreach($cruds as $crud)
+                    <tr>
+                        <th scope="row">{{$crud->id}}</th>
+                        <td>{{$crud->name}}</td>
+                        <td>{{$crud->age}}</td>
+                        <td>{{$crud->address}}</td>
+                        <td>{{$crud->created_at}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="http://">Edit</a>
+                            <a class="btn btn-danger" href="http://">Delete</a>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="5">Users not added yet</td>
+                </tr>
+            @endif
+        </tbody>

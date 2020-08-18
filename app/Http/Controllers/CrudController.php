@@ -14,8 +14,9 @@ class CrudController extends Controller
     }
 
     function show(){
-        $cruds = DB::table('crud')->orderBy('id')->get();
-        
+        // $cruds = DB::table('crud')->orderBy('id')->get();
+        $cruds = Crud::all();
+
         $name = "Add New";
         return view('list')->with(compact('cruds'))->with(compact('name'));
         // return view('list', ['cruds' => $cruds],['name' => $name]);

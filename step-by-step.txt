@@ -54,3 +54,5 @@
         }
     -in route
         Route::post('/crud/add', 'CrudController@saveUser')->name('crud.save');
+    -then, create model with artisan command (Eloquent ORM) in 'app/Crud.php'
+        php artisan make:model Crud

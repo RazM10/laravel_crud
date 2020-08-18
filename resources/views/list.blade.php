@@ -25,7 +25,7 @@
         <div class="row pb-2">
             <div class="col-md-12 text-right">
                 <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
-                <a class="btn btn-primary" href="{{route('crud.add')}}">Add New</a>
+                <a class="btn btn-primary" href="{{route('crud.add')}}">{{$name}}</a>
             </div>
 
             @if(Session::has('msg'))
@@ -53,17 +53,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="http://">Edit</a>
-                                        <a class="btn btn-danger" href="http://">Delete</a>
-                                    </td>
-                                </tr>
+                                @if($cruds)
+                                    @foreach($cruds as $crud)
+                                        <tr>
+                                            <th scope="row">{{$crud->id}}</th>
+                                            <td>{{$crud->name}}</td>
+                                            <td>{{$crud->age}}</td>
+                                            <td>{{$crud->address}}</td>
+                                            <td>{{$crud->created_at}}</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="http://">Edit</a>
+                                                <a class="btn btn-danger" href="http://">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5">Users not added yet</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

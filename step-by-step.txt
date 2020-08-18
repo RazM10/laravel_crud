@@ -64,7 +64,7 @@
         -insert can do in two ways (1.Database/Query Bulder 2.Eloquent ORM[Better])
         -   use Illuminate\Support\Facades\Validator;
             use App\Crud;
-            
+
             function saveUser(Request $request){
             // dd($request->all());
             $validator = Validator::make($request->all(),[
@@ -104,4 +104,7 @@
             </div>
         @endif
 
-    
+-For Read All Data
+    -retrive data can do in two ways (1.Database/Query Bulder 2.Eloquent ORM[Better])
+    -edit show method in CrudController
+        

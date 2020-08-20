@@ -27,7 +27,7 @@
                             Form
                         </div>
                         <div class="card-body">
-                            <form action="{{url('/crud/edit/')}}" method="post" name="addUser" id="addUser">
+                            <form action="" method="post" name="addUser" id="addUser">
                                 @csrf
                                 <div class="form-group">
                                     <label for="nameid">Example select</label>
@@ -42,21 +42,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" value="{{old('name',$crud->name)}}" placeholder="Enter Name" class="form-control {{ ($errors->any() && $errors->first('name')) ? 'is-invalid' : '' }}">
+                                    <input type="text" name="name" id="name" value="{{old('name')}}" placeholder="Enter Name" class="form-control {{ ($errors->any() && $errors->first('name')) ? 'is-invalid' : '' }}">
                                     @if($errors->any())
                                         <small class="form-text invalid-feedback">{{$errors->first('name')}}</small>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="age">Age</label>
-                                    <input type="text" name="age" id="age" value="{{old('age',$crud->age)}}" placeholder="Age" class="form-control {{ ($errors->any() && $errors->first('age')) ? 'is-invalid' : '' }}">
+                                    <input type="text" name="age" id="age" value="{{old('age')}}" placeholder="Age" class="form-control {{ ($errors->any() && $errors->first('age')) ? 'is-invalid' : '' }}">
                                     @if($errors->any())
                                         <small class="form-text invalid-feedback">{{$errors->first('age')}}</small>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <input type="text" name="address" id="address" value="{{old('address',$crud->address)}}" placeholder="Address" class="form-control {{ ($errors->any() && $errors->first('address')) ? 'is-invalid' : '' }}">
+                                    <input type="text" name="address" id="address" value="{{old('address')}}" placeholder="Address" class="form-control {{ ($errors->any() && $errors->first('address')) ? 'is-invalid' : '' }}">
                                     @if($errors->any())
                                         <small class="form-text invalid-feedback">{{$errors->first('address')}}</small>
                                     @endif
@@ -69,11 +69,53 @@
             </div>
         </div>
         
-        <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- <script src="{{asset('assets/js/jquery.min.js')}}"></script> -->
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script>
             $(document).ready(function () {
-                console.log("hello");
+                $("#nameid").change(function () {
+                    var nameid = $("#nameid").val();
+                    console.log(nameid);
+
+                    $.ajax({
+                        url: '/crud/ajaxCall/'+nameid,
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(response){
+                            console.log('response');
+                        }
+                    });
+
+                    // $.ajax({
+                    //     url: '/crud/ajaxCall/{id}',
+                    //     type: 'GET',
+                    //     data: { id: nameid },
+                    //     success: function(response)
+                    //     {
+                    //         console.log('response');
+                    //     }
+                    // });
+
+                    // $.ajax({
+                    //     type: "POST",
+                    //     url: '@Url.Action("GetEmployeeByDepartmentId", "Employee")',
+                    //     contentType: "application/json; charset=utf-8",
+                    //     data: JSON.stringify(json),
+                    //     success: function (data) {
+
+                    //         $("#employeeDetails").empty();
+                            
+
+                    //         $.each(data, function (key, value) {
+
+                    //             $("#employeeDetails").append('<tr><td>' + value.Name + '</td>   <td>' + value.Email + '</td>   <td>' + value.Gender + '</td> </tr>');
+
+                    //         });
+
+                    //     }
+                    // });
+                });
             });
         </script>
 

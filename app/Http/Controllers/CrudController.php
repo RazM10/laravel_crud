@@ -106,4 +106,18 @@ class CrudController extends Controller
 
         return view('ddform')->with(compact('cruds'));
     }
+
+    function ajaxCall($id = 0){
+        // $id = $_GET['id'];
+        // $crud = Crud::where('id', $id)->first();
+        // return Response::json(array(
+        //     'name' => 'hello',  
+        // ));
+        // return response()->json(['success' => true, 'html' => 'Hello']);
+        // Fetch all records
+        $userData['data'] = $id;
+
+        echo json_encode($userData);
+        exit;
+    }
 }

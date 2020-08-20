@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row pb-2 pt-2">
             <div class="col-md-12 text-right">
-                <!-- <a class="btn btn-primary" href="{{url('crud/add')}}">Add New</a> -->
+                <a class="btn btn-primary" href="{{url('crud/ddform')}}">DropDown</a>
                 <a class="btn btn-primary mb-1" href="{{route('crud.add')}}">{{$name}}</a>
             </div>
 

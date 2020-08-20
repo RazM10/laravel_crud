@@ -99,4 +99,11 @@ class CrudController extends Controller
         $request->session()->flash('msg','Data Deleted Successfully');
         return redirect('/crud');
     }
+
+    //DropDown Form
+    function ddForm(){
+        $cruds = Crud::all();
+
+        return view('ddform')->with(compact('cruds'));
+    }
 }

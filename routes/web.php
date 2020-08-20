@@ -31,3 +31,6 @@ Route::post('/crud/edit/{id}', 'CrudController@updateCrud')->name('crud.update')
 
 //For Delete Data
 Route::get('/crud/delete/{id}', 'CrudController@deleteCrud')->name('crud.delete');
+
+//DropDown form
+Route::get('/crud/ddform', 'CrudController@ddForm')->name('crud.ddForm');

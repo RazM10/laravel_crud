@@ -119,8 +119,8 @@ class CrudController extends Controller
         // $userData['data'] = $id;
         // echo json_encode($userData);
         // exit;
-        
-        $msg = "This is a simple message.";
+
+        $msg = "This is a simple message.id: ".$id;
         return response()->json(array('msg'=> $msg), 200);
     }
 

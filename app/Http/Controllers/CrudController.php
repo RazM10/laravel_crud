@@ -115,10 +115,13 @@ class CrudController extends Controller
         // ));
         // return response()->json(['success' => true, 'html' => 'Hello']);
         // Fetch all records
-        $userData['data'] = $id;
-
-        echo json_encode($userData);
-        exit;
+        
+        // $userData['data'] = $id;
+        // echo json_encode($userData);
+        // exit;
+        
+        $msg = "This is a simple message.";
+        return response()->json(array('msg'=> $msg), 200);
     }
 
     //Test

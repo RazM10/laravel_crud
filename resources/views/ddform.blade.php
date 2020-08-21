@@ -87,6 +87,22 @@
                     }
                 });
             }
+
+            $("#nameid").change(function () {
+                var nameid = $("#nameid").val();
+                console.log(nameid);
+
+                $.ajax({
+                    // url: '/crud/ajaxCall/'+nameid,
+                    url: "{{url('/crud/ajaxCall')}}/"+nameid,
+                    type: 'GET',
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success: function(response){
+                        console.log(response.msg+", yes done");
+                    }
+                });
+            });
+
             // $(document).ready(function () {
             //     $("#nameid").change(function () {
             //         var nameid = $("#nameid").val();

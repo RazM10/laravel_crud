@@ -120,4 +120,10 @@ class CrudController extends Controller
         echo json_encode($userData);
         exit;
     }
+
+    //Test
+    public function index() {
+        $msg = "This is a simple message.";
+        return response()->json(array('msg'=> $msg), 200);
+     }
 }

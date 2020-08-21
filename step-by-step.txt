@@ -1,3 +1,6 @@
+-create laravel project by
+    composer create-project --prefer-dist laravel/laravel blog
+
 -edit db name after creating db in myadmin in .env
 
 -to generate migration file in database/migrations/*

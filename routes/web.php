@@ -35,3 +35,10 @@ Route::get('/crud/delete/{id}', 'CrudController@deleteCrud')->name('crud.delete'
 //DropDown form
 Route::get('/crud/ddform', 'CrudController@ddForm')->name('crud.ddForm');
 Route::get('/crud/ajaxCall/{id}', 'CrudController@ajaxCall')->name('crud.ajaxCall');
+
+//Test
+Route::get('ajax',function() {
+    return view('message');
+ });
+// Route::post('/getmsg','CrudController@index')->name('getmsg');
+Route::get('/getmsg','CrudController@index')->name('getmsg');

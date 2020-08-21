@@ -62,6 +62,7 @@
                                     @endif
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="button" onclick="getMessage()" class="btn btn-primary">show</button>
                             </form>
                         </div>
                     </div>
@@ -73,50 +74,63 @@
         <!-- <script src="{{asset('assets/js/jquery.min.js')}}"></script> -->
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script>
-            $(document).ready(function () {
-                $("#nameid").change(function () {
-                    var nameid = $("#nameid").val();
-                    console.log(nameid);
+            function getMessage() {
+                $.ajax({
+                    type:'GET',
+                    // type:'POST',
+                    // url:'/getmsg/',
+                    url:"{{ route('getmsg') }}",
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success:function(data) {
+                        // $("#msg").html(data.msg);
+                        console.log(data.msg);
+                    }
+                });
+            }
+            // $(document).ready(function () {
+            //     $("#nameid").change(function () {
+            //         var nameid = $("#nameid").val();
+            //         console.log(nameid);
 
-                    $.ajax({
-                        url: '/crud/ajaxCall/'+nameid,
-                        type: 'get',
-                        dataType: 'json',
-                        success: function(response){
-                            console.log('response');
-                        }
-                    });
+            //         $.ajax({
+            //             url: '/crud/ajaxCall/'+nameid,
+            //             type: 'get',
+            //             dataType: 'json',
+            //             success: function(response){
+            //                 console.log('response');
+            //             }
+            //         });
 
-                    // $.ajax({
-                    //     url: '/crud/ajaxCall/{id}',
-                    //     type: 'GET',
-                    //     data: { id: nameid },
-                    //     success: function(response)
-                    //     {
-                    //         console.log('response');
-                    //     }
-                    // });
+            //         // $.ajax({
+            //         //     url: '/crud/ajaxCall/{id}',
+            //         //     type: 'GET',
+            //         //     data: { id: nameid },
+            //         //     success: function(response)
+            //         //     {
+            //         //         console.log('response');
+            //         //     }
+            //         // });
 
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: '@Url.Action("GetEmployeeByDepartmentId", "Employee")',
-                    //     contentType: "application/json; charset=utf-8",
-                    //     data: JSON.stringify(json),
-                    //     success: function (data) {
+            //         // $.ajax({
+            //         //     type: "POST",
+            //         //     url: '@Url.Action("GetEmployeeByDepartmentId", "Employee")',
+            //         //     contentType: "application/json; charset=utf-8",
+            //         //     data: JSON.stringify(json),
+            //         //     success: function (data) {
 
-                    //         $("#employeeDetails").empty();
+            //         //         $("#employeeDetails").empty();
                             
 
-                    //         $.each(data, function (key, value) {
+            //         //         $.each(data, function (key, value) {
 
-                    //             $("#employeeDetails").append('<tr><td>' + value.Name + '</td>   <td>' + value.Email + '</td>   <td>' + value.Gender + '</td> </tr>');
+            //         //             $("#employeeDetails").append('<tr><td>' + value.Name + '</td>   <td>' + value.Email + '</td>   <td>' + value.Gender + '</td> </tr>');
 
-                    //         });
+            //         //         });
 
-                    //     }
-                    // });
-                });
-            });
+            //         //     }
+            //         // });
+            //     });
+            // });
         </script>
 
     </body>

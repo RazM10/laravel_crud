@@ -70,8 +70,8 @@
             </div>
         </div>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- <script src="{{asset('assets/js/jquery.min.js')}}"></script> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="{{asset('assets/js/jquery.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script>
             function getMessage() {
@@ -96,57 +96,23 @@
                     // url: '/crud/ajaxCall/'+nameid,
                     url: "{{url('/crud/ajaxCall')}}/"+nameid,
                     type: 'GET',
-                    data:'_token = <?php echo csrf_token() ?>',
+                    data: { id: nameid },
                     success: function(response){
                         console.log(response.msg+", yes done");
+                        $("#name").val(response.obj.name);
+                        $("#age").val(response.obj.age);
+                        $("#address").val(response.obj.address);
                     }
                 });
             });
 
-            // $(document).ready(function () {
-            //     $("#nameid").change(function () {
-            //         var nameid = $("#nameid").val();
-            //         console.log(nameid);
+            //=== two techniques work better ===
+            // data: { id: nameid }  ->  you can retrieve this value in controller by "$id2 = $_GET['id'];"
+            // data:'_token = php echo csrf_token() '  -> close this php code by < ? ?>
 
-            //         $.ajax({
-            //             url: '/crud/ajaxCall/'+nameid,
-            //             type: 'get',
-            //             dataType: 'json',
-            //             success: function(response){
-            //                 console.log('response');
-            //             }
-            //         });
-
-            //         // $.ajax({
-            //         //     url: '/crud/ajaxCall/{id}',
-            //         //     type: 'GET',
-            //         //     data: { id: nameid },
-            //         //     success: function(response)
-            //         //     {
-            //         //         console.log('response');
-            //         //     }
-            //         // });
-
-            //         // $.ajax({
-            //         //     type: "POST",
-            //         //     url: '@Url.Action("GetEmployeeByDepartmentId", "Employee")',
-            //         //     contentType: "application/json; charset=utf-8",
-            //         //     data: JSON.stringify(json),
-            //         //     success: function (data) {
-
-            //         //         $("#employeeDetails").empty();
-                            
-
-            //         //         $.each(data, function (key, value) {
-
-            //         //             $("#employeeDetails").append('<tr><td>' + value.Name + '</td>   <td>' + value.Email + '</td>   <td>' + value.Gender + '</td> </tr>');
-
-            //         //         });
-
-            //         //     }
-            //         // });
-            //     });
-            // });
+            //=== two techniques work better ===
+            // url:"{{ route('getmsg') }}"
+            // url: "{{url('/crud/ajaxCall')}}/"+nameid  ->  get this nameid in controller by "function ajaxCall($id = 0){}"
         </script>
 
     </body>

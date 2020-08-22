@@ -108,8 +108,8 @@ class CrudController extends Controller
     }
 
     function ajaxCall($id = 0){
-        // $id = $_GET['id'];
-        // $crud = Crud::where('id', $id)->first();
+        $id2 = $_GET['id'];
+        $crud = Crud::where('id', $id2)->first();
         // return Response::json(array(
         //     'name' => 'hello',  
         // ));
@@ -120,8 +120,8 @@ class CrudController extends Controller
         // echo json_encode($userData);
         // exit;
 
-        $msg = "This is a simple message.id: ".$id;
-        return response()->json(array('msg'=> $msg), 200);
+        $msg = "This is a simple message.id: ".$id." From Obj: ".$crud->name;
+        return response()->json(array('msg'=> $msg, 'obj'=> $crud), 200);
     }
 
     //Test

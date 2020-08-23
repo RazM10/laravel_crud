@@ -128,5 +128,20 @@ class CrudController extends Controller
     public function index() {
         $msg = "This is a simple message.";
         return response()->json(array('msg'=> $msg), 200);
-     }
+    }
+
+
+    //=== Ajax Crud ===
+    public function get_crud_data(Request $request)
+    {
+        // $companies = Company::latest()->paginate(5);
+
+        // return Request::ajax() ? 
+        //     response()->json($companies,Response::HTTP_OK) 
+        //     : abort(404);
+
+        $cruds = Crud::all();
+        return response()->json($cruds, 200);
+    }
+
 }

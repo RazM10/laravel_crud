@@ -60,6 +60,48 @@
 
         <script src="{{asset('assets/js/jquery.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script>
+            
+            var root_url = <?php echo json_encode(route('data')) ?>;
+            var store = <?php echo json_encode(route('crud.store')) ?>;
+
+            $(document).ready(function () {
+                get_crud_data()
+
+                //Get all crud
+                function get_crud_data() {
+                    
+                    $.ajax({
+                        url: root_url,
+                        type:'GET',
+                        data: { }
+                    }).done(function(data){
+                        table_data_row(data)
+                    });
+                }
+
+                //Crud table row
+                function table_data_row(data) {
+
+                    // var	rows = '';
+
+                    $.each( data, function( key, value ) {
+                        console.log(value.name);
+                        // rows = rows + '<tr>';
+                        // rows = rows + '<td>'+value.name+'</td>';
+                        // rows = rows + '<td>'+value.address+'</td>';
+                        // rows = rows + '<td data-id="'+value.id+'">';
+                        //         rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="'+value.id+'" data-toggle="modal" data-target="#modal-id">Edit</a> ';
+                        //         rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="'+value.id+'" >Delete</a> ';
+                        //         rows = rows + '</td>';
+                        // rows = rows + '</tr>';
+                    });
+
+                    // $("tbody").html(rows);
+                }
+            });
+    
+        </script>
 
     </body>
 </html>

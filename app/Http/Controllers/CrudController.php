@@ -131,6 +131,10 @@ class CrudController extends Controller
     }
 
 
+
+
+
+    
     //=== Ajax Crud ===
     public function get_crud_data(Request $request)
     {
@@ -142,6 +146,24 @@ class CrudController extends Controller
 
         $cruds = Crud::all();
         return response()->json($cruds, 200);
+    }
+
+    public function store(Request $request)
+    {
+        $crud = new Crud;
+
+        $crud->name = $request->name;
+        $crud->age = $request->age;
+        $crud->address = $request->address;
+
+        $crud->save();
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data inserted successfully'
+            ]
+        );
     }
 
 }

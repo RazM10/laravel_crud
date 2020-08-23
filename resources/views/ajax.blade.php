@@ -17,40 +17,42 @@
         <div class="container">
             <h2>Modal Example</h2>
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            <button type="button" class="btn btn-info btn-lg" id="createNewCrud">Open Modal</button>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal fade" id="modal-id" role="dialog">
                 <div class="modal-dialog">
                 
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h5 class="modal-title" id="userCrudModal">Modal title</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                        <form id="cruddata">
+                            <input type="hidden" id="crud_id" name="crud_id" value="">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="age" class="col-form-label">Age:</label>
+                                    <input type="text" class="form-control" id="age" name="age">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="col-form-label">Address:</label>
+                                    <input type="text" class="form-control" id="address" name="address">
+                                </div>
+                            
                             </div>
-                            <div class="form-group">
-                                <label for="age" class="col-form-label">Age:</label>
-                                <input type="text" class="form-control" id="age" name="age">
-                            </div>
-                            <div class="form-group">
-                                <label for="address" class="col-form-label">Address:</label>
-                                <input type="text" class="form-control" id="address" name="address">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="submit" id="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
                     </div>
                 
                 </div>
@@ -88,6 +90,7 @@
         </div>
 
         <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script>
             
@@ -108,6 +111,8 @@
                         table_data_row(data)
                     });
                 }
+
+
 
                 //Crud table row
                 function table_data_row(data) {
@@ -131,6 +136,61 @@
 
                     $("tbody").html(rows);
                 }
+
+
+
+                //Insert crud data
+                $("body").on("click","#createNewCrud",function(e){
+
+                    e.preventDefault;
+                    $('#userCrudModal').html("Create Crud");
+                    $('#submit').val("Create crud");
+                    $('#modal-id').modal('show');
+                    $('#crud_id').val('');
+                    $('#cruddata').trigger("reset");
+
+                });
+
+
+
+                //Save data into database
+                $('body').on('click', '#submit', function (event) {
+                    event.preventDefault()
+                    // var id = $("#crud_id").val();
+                    var name = $("#name").val();
+                    var age = $("#age").val();
+                    var address = $("#address").val();
+                
+                    $.ajax({
+                        url: store,
+                        type: "GET",
+                        data: {
+                            // id: id,
+                            name: name,
+                            age: age,
+                            address: address
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            
+                            $('#cruddata').trigger("reset");
+                            $('#modal-id').modal('hide');
+                            console.log("Saved");
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Success',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            get_crud_data()
+                        },
+                        error: function (data) {
+                            console.log('Error......');
+                        }
+                    });
+                });
+
             });
     
         </script>

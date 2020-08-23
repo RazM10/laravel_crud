@@ -55,6 +55,35 @@
                 
                 </div>
             </div>
+        </div>
+        <!-- Modal End -->
+
+        <!-- Table start -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Created at</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table End -->
             
         </div>
 
@@ -83,21 +112,24 @@
                 //Crud table row
                 function table_data_row(data) {
 
-                    // var	rows = '';
+                    var	rows = '';
 
                     $.each( data, function( key, value ) {
                         console.log(value.name);
-                        // rows = rows + '<tr>';
-                        // rows = rows + '<td>'+value.name+'</td>';
-                        // rows = rows + '<td>'+value.address+'</td>';
-                        // rows = rows + '<td data-id="'+value.id+'">';
-                        //         rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="'+value.id+'" data-toggle="modal" data-target="#modal-id">Edit</a> ';
-                        //         rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="'+value.id+'" >Delete</a> ';
-                        //         rows = rows + '</td>';
-                        // rows = rows + '</tr>';
+                        rows = rows + '<tr>';
+                        rows = rows + '<td>'+value.id+'</td>';
+                        rows = rows + '<td>'+value.name+'</td>';
+                        rows = rows + '<td>'+value.age+'</td>';
+                        rows = rows + '<td>'+value.address+'</td>';
+                        rows = rows + '<td>'+value.created_at+'</td>';
+                        rows = rows + '<td data-id="'+value.id+'">';
+                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="'+value.id+'" data-toggle="modal" data-target="#modal-id">Edit</a> ';
+                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="'+value.id+'" >Delete</a> ';
+                                rows = rows + '</td>';
+                        rows = rows + '</tr>';
                     });
 
-                    // $("tbody").html(rows);
+                    $("tbody").html(rows);
                 }
             });
     

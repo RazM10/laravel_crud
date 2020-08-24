@@ -183,4 +183,15 @@ class CrudController extends Controller
         );
     }
 
+    public function destroy($id)
+    {
+        $company = Crud::find($id);
+
+        $company->delete();
+
+        return response()->json([
+            'message' => 'Data deleted successfully!'
+        ]);
+    }
+
 }

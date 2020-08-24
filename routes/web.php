@@ -50,10 +50,11 @@ Route::get('/ajax/cruds', 'CrudController@get_crud_data')->name('data');
 Route::get('/ajax/addcrud', 'CrudController@store')->name('crud.store');
 Route::get('/ajax/edit/{id}', 'CrudController@ajaxCall')->name('crud.edit');
 Route::get('/ajax/updatecrud', 'CrudController@update')->name('crud.update');
+Route::get('/ajax/deleteCrud/{id}', 'CrudController@destroy')->name('Crud.destroy');
 
-Route::get('/company', 'CompanyController@view')->name('company.index');
+// Route::get('/company', 'CompanyController@view')->name('company.index');
 // Route::get('/companies', 'CompanyController@get_company_data')->name('data');
-Route::get('/addcompany', 'CompanyController@view')->name('company.view');
+// Route::get('/addcompany', 'CompanyController@view')->name('company.view');
 // Route::post('/addcompany', 'CompanyController@Store')->name('company.store');
-Route::delete('/addcompany/{id}', 'CompanyController@destroy')->name('company.destroy');
+// Route::delete('/addcompany/{id}', 'CompanyController@destroy')->name('company.destroy');
 // Route::get('/addcompany/{id}/edit', 'CompanyController@update')->name('company.update');

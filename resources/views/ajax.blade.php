@@ -15,9 +15,8 @@
         </nav>
 
         <div class="container">
-            <h2>Modal Example</h2>
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" id="createNewCrud">Open Modal</button>
+            <button type="button" class="btn btn-info btn-lg m-2" id="createNewCrud">Add New Data</button>
 
             <!-- Modal -->
             <div class="modal fade" id="modal-id" role="dialog">
@@ -251,6 +250,36 @@
                     });
                 });
 
+
+
+                //DeleteCompany
+                $('body').on('click', '#deleteCrud', function (event) {
+                    if(!confirm("Do you really want to do this?")) {
+                        return false;
+                    }
+
+                    event.preventDefault();
+                    var id = $(this).attr('data-id');
+                
+                    $.ajax(
+                        {
+                        url: "{{url('/ajax/deleteCrud')}}/"+id,
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        success: function (response){
+                        
+                            Swal.fire(
+                            'Remind!',
+                            'Data deleted successfully!',
+                            'success'
+                            )
+                            get_crud_data()
+                        }
+                    });
+                    return false;
+                });
 
             });
     

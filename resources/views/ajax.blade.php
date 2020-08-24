@@ -33,6 +33,7 @@
                         </div>
                         <form id="cruddata">
                             <input type="hidden" id="crud_id" name="crud_id" value="">
+                            
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label">Name:</label>
@@ -128,8 +129,8 @@
                         rows = rows + '<td>'+value.address+'</td>';
                         rows = rows + '<td>'+value.created_at+'</td>';
                         rows = rows + '<td data-id="'+value.id+'">';
-                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCompany" data-id="'+value.id+'" data-toggle="modal" data-target="#modal-id">Edit</a> ';
-                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCompany" data-id="'+value.id+'" >Delete</a> ';
+                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="editCrud" data-id="'+value.id+'" data-toggle="modal" data-target="#modal-id">Edit</a> ';
+                                rows = rows + '<a class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" id="deleteCrud" data-id="'+value.id+'" >Delete</a> ';
                                 rows = rows + '</td>';
                         rows = rows + '</tr>';
                     });
@@ -138,7 +139,7 @@
                 }
 
 
-
+                
                 //Insert crud data
                 $("body").on("click","#createNewCrud",function(e){
 
@@ -146,7 +147,7 @@
                     $('#userCrudModal').html("Create Crud");
                     $('#submit').val("Create crud");
                     $('#modal-id').modal('show');
-                    $('#crud_id').val('');
+                    $('#crud_id').val('0');
                     $('#cruddata').trigger("reset");
 
                 });
@@ -156,40 +157,110 @@
                 //Save data into database
                 $('body').on('click', '#submit', function (event) {
                     event.preventDefault()
-                    // var id = $("#crud_id").val();
+                    var id = $("#crud_id").val();
                     var name = $("#name").val();
                     var age = $("#age").val();
                     var address = $("#address").val();
-                
+                    if(id == 0){
+                        $.ajax({
+                            url: store,
+                            type: "GET",
+                            data: {
+                                // id: id,
+                                name: name,
+                                age: age,
+                                address: address
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                
+                                $('#cruddata').trigger("reset");
+                                $('#modal-id').modal('hide');
+                                console.log("Saved");
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+                                get_crud_data()
+                            },
+                            error: function (data) {
+                                console.log('Error......');
+                            }
+                        });
+                    }
+                    else{
+                        $.ajax({
+                            url: store,
+                            type: "GET",
+                            data: {
+                                id: id,
+                                name: name,
+                                age: age,
+                                address: address
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                
+                                $('#cruddata').trigger("reset");
+                                $('#modal-id').modal('hide');
+                                console.log("Saved");
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+                                get_crud_data()
+                            },
+                            error: function (data) {
+                                console.log('Error......');
+                            }
+                        });
+                    }
+                    
+                });
+
+
+                //Edit modal window
+                $('body').on('click', '#editCrud', function (event) {
+
+                    event.preventDefault();
+                    var id = $(this).data('id');
+                    console.log("id is: "+id);
+
                     $.ajax({
-                        url: store,
-                        type: "GET",
-                        data: {
-                            // id: id,
-                            name: name,
-                            age: age,
-                            address: address
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            
-                            $('#cruddata').trigger("reset");
-                            $('#modal-id').modal('hide');
-                            console.log("Saved");
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            })
-                            get_crud_data()
-                        },
-                        error: function (data) {
-                            console.log('Error......');
+                        // url: '/crud/ajaxCall/'+nameid,
+                        url: "{{url('/ajax/edit')}}/"+id,
+                        type: 'GET',
+                        data: { id: id },
+                        success: function(response){
+                            console.log(response.msg+", yes data retrieve done");
+                            $('#userCrudModal').html("Edit company");
+                            $('#submit').val("Edit company");
+                            $('#modal-id').modal('show');
+                            $('#crud_id').val(response.obj.id);
+                            $('#name').val(response.obj.name);
+                            $('#age').val(response.obj.age);
+                            $('#address').val(response.obj.address);
                         }
                     });
+
+                    // $.get('/ajax/'+ id ='/edit', function (data) {
+                        
+                    //     $('#userCrudModal').html("Edit company");
+                    //     $('#submit').val("Edit company");
+                    //     $('#modal-id').modal('show');
+                    //     $('#crud_id').val(data.data.id);
+                    //     $('#name').val(data.data.name);
+                    //     $('#age').val(data.data.age);
+                    //     $('#address').val(data.data.address);
+                    // })
                 });
+
 
             });
     

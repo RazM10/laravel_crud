@@ -166,4 +166,21 @@ class CrudController extends Controller
         );
     }
 
+    public function update(Request $request)
+    {
+
+        $crud = Crud::find($request->id);
+        $crud->name = $request->name;
+        $crud->age = $request->age;
+        $crud->address = $request->address;
+        $crud->save();
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data Updated successfully'
+            ]
+        );
+    }
+
 }

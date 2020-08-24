@@ -97,6 +97,7 @@
             
             var root_url = <?php echo json_encode(route('data')) ?>;
             var store = <?php echo json_encode(route('crud.store')) ?>;
+            var update = <?php echo json_encode(route('crud.update')) ?>;
 
             $(document).ready(function () {
                 get_crud_data()
@@ -193,7 +194,7 @@
                     }
                     else{
                         $.ajax({
-                            url: store,
+                            url: update,
                             type: "GET",
                             data: {
                                 id: id,
@@ -206,7 +207,7 @@
                                 
                                 $('#cruddata').trigger("reset");
                                 $('#modal-id').modal('hide');
-                                console.log("Saved");
+                                console.log("Updated");
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
@@ -248,17 +249,6 @@
                             $('#address').val(response.obj.address);
                         }
                     });
-
-                    // $.get('/ajax/'+ id ='/edit', function (data) {
-                        
-                    //     $('#userCrudModal').html("Edit company");
-                    //     $('#submit').val("Edit company");
-                    //     $('#modal-id').modal('show');
-                    //     $('#crud_id').val(data.data.id);
-                    //     $('#name').val(data.data.name);
-                    //     $('#age').val(data.data.age);
-                    //     $('#address').val(data.data.address);
-                    // })
                 });
 
 

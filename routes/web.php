@@ -48,8 +48,8 @@ Route::get('/ajax',function() {
 });
 Route::get('/ajax/cruds', 'CrudController@get_crud_data')->name('data');
 Route::get('/ajax/addcrud', 'CrudController@store')->name('crud.store');
-// Route::get('/ajax/{id}/edit', 'CrudController@update')->name('crud.update');
-Route::get('/ajax/edit/{id}', 'CrudController@ajaxCall')->name('crud.update');
+Route::get('/ajax/edit/{id}', 'CrudController@ajaxCall')->name('crud.edit');
+Route::get('/ajax/updatecrud', 'CrudController@update')->name('crud.update');
 
 Route::get('/company', 'CompanyController@view')->name('company.index');
 // Route::get('/companies', 'CompanyController@get_company_data')->name('data');
